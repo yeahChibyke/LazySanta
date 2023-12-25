@@ -9,7 +9,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /// @title LazySanta contract
 /// @notice This contract is for a token called LazySanta
 contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
-
     // private variable to keep track of the next token Id
     uint256 private nextTokenId_;
 
@@ -36,10 +35,7 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     /// @notice Deploy a new LazySanta contract
     /// @param chiefElf The address of the chief elf
-    constructor(address chiefElf)
-        ERC721("LazySanta", "LS")
-        Ownable(chiefElf)
-    {
+    constructor(address chiefElf) ERC721("LazySanta", "LS") Ownable(chiefElf) {
         // initialize the next token id to 1 in the constructor
         nextTokenId_ = 1;
 
@@ -62,7 +58,7 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     }
 
     // mapping to store proposed changes
-    mapping (address => ProposedChange) public proposedChanges;
+    mapping(address => ProposedChange) public proposedChanges;
 
     /// @notice Propose a change to the lazyFee
     /// @param lazyFee_ The proposed new lazyFee
@@ -93,11 +89,10 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     /// @notice Safely mint a LazySanta
     /// @dev Requires payment of the correct amount of ether and checks that the maximum supply has not been reached
-    function safeMint() payable external {
+    function safeMint() external payable {
         require(lazyWallets[msg.sender] < 1, "Max LazySanta mint per wallet exceeded!");
         require(msg.value == lazyFee, "Input accurate price of one LazySanta!");
         require(currentSupply < maxSupply, "All LazySantas have been minted!");
-
 
         lazyWallets[msg.sender]++;
         lazyList.push(msg.sender);
@@ -132,9 +127,8 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         require(callSuccess, "Withdrawal failed!");
     }
 
-
     // function to get all minters
-    function getLazyList() external view onlyOwner returns(address[] memory) {
+    function getLazyList() external view onlyOwner returns (address[] memory) {
         return lazyList;
     }
 
@@ -144,24 +138,16 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         internal
         override(ERC721, ERC721Enumerable)
         returns (address)
-    {// function to withdraw all funds from the contract
-       
+    {
+        // function to withdraw all funds from the contract
         return super._update(to, tokenId, auth);
     }
 
-    function _increaseBalance(address account, uint128 value)
-        internal
-        override(ERC721, ERC721Enumerable)
-    {
+    function _increaseBalance(address account, uint128 value) internal override(ERC721, ERC721Enumerable) {
         super._increaseBalance(account, value);
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
+    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
     }
 

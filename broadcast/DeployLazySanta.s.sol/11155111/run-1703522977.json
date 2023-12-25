@@ -22,49 +22,18 @@
       "isFixedGasLimit": false
     }
   ],
-  "receipts": [
-    {
-      "transactionHash": "0x15da8222a83788d41daf6f8f863d94e61755502d963c6b126f6b9edf169daa2d",
-      "transactionIndex": "0x1b",
-      "blockHash": "0x9c42c5322630e0d69197af9539e1b2936a584825c379e0aa46aa879b4b0e80ae",
-      "blockNumber": "0x4b9fbd",
-      "from": "0x25571828c3F5cdC6f57d124dccd65D1be7ECaA2e",
-      "to": null,
-      "cumulativeGasUsed": "0x561219",
-      "gasUsed": "0x230774",
-      "contractAddress": "0x32801d7DfD735C21169E63CcEb8Fdf12A0a5aB6C",
-      "logs": [
-        {
-          "address": "0x32801d7DfD735C21169E63CcEb8Fdf12A0a5aB6C",
-          "topics": [
-            "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
-            "0x0000000000000000000000000000000000000000000000000000000000000000",
-            "0x00000000000000000000000025571828c3f5cdc6f57d124dccd65d1be7ecaa2e"
-          ],
-          "data": "0x",
-          "blockHash": "0x9c42c5322630e0d69197af9539e1b2936a584825c379e0aa46aa879b4b0e80ae",
-          "blockNumber": "0x4b9fbd",
-          "transactionHash": "0x15da8222a83788d41daf6f8f863d94e61755502d963c6b126f6b9edf169daa2d",
-          "transactionIndex": "0x1b",
-          "logIndex": "0x45",
-          "removed": false
-        }
-      ],
-      "status": "0x1",
-      "logsBloom": "0x00000000000000000000000000200000004000000000000000800000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000001000000000000000000000000000000000000020000000000000000000800000000000000000000000000008000400000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000",
-      "type": "0x2",
-      "effectiveGasPrice": "0x1718baaccb"
-    }
-  ],
+  "receipts": [],
   "libraries": [],
-  "pending": [],
+  "pending": [
+    "0x15da8222a83788d41daf6f8f863d94e61755502d963c6b126f6b9edf169daa2d"
+  ],
   "returns": {
     "0": {
       "internal_type": "contract LazySanta",
       "value": "0x32801d7DfD735C21169E63CcEb8Fdf12A0a5aB6C"
     }
   },
-  "timestamp": 1703523005,
+  "timestamp": 1703522977,
   "chain": 11155111,
   "multi": false,
   "commit": "755227e"

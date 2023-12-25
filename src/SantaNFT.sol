@@ -9,10 +9,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     // private variable to keep track of the next token Id
-    uint256 private _nextTokenId;
+    uint256 private nextTokenId_;
 
     // price to mint a LazySanta
-    uint256 public lazyFee_;
+    uint256 public lazyFee;
 
     // current supply of LazySantas already minted
     uint256 public currentSupply;
@@ -24,7 +24,6 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     string public uri;
 
     // public list of LazySanta lazyList
-    s
     address[] public lazyList;
 
     // mapping to keep track of number of mints each wallet has done
@@ -41,15 +40,15 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         maxSupply = 20;
 
         // initialize lazyFee_ in constructor
-        lazyFee_ = 0.01 ether;
+        lazyFee = 0.01 ether;
 
         // initialize uri in constructor
         uri = "ipfs://QmWj3UTHGEkcP2uHzk6wP4gzYQUKmKTZ4sVWLyiB7y9md7";
     }
 
     // function to set the mint price
-    function setlazyFee_(uint256 lazyFee__) external onlyOwner {
-        lazyFee_ = lazyFee__;
+    function setlazyFee_(uint256 lazyFee_) external onlyOwner {
+        lazyFee = lazyFee_;
     }
 
     // function to set the maximum supply
@@ -62,9 +61,9 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         uri = uri_;
     }
 
-    function safeMint() public onlyOwner {
+    function safeMint() payable external {
         require(lazyWallets[msg.sender] < 1, "Max LazySanta mint per wallet exceeded!");
-        require(msg.value == lazyFee_, "Input accurate price of one LazySanta!");
+        require(msg.value == lazyFee, "Input accurate price of one LazySanta!");
         require(currentSupply < maxSupply, "All LazySantas have been minted!");
 
 
@@ -77,22 +76,18 @@ contract LazySanta is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     }
 
     function withdraw() external onlyOwner {
-        for(uint256 lazyList
-        Index = 0; lazyList
-        Index < lazyList
-        s.length; lazyList
-        Index++) {
-            address lazyList
-             = lazyList
-            s[lazyList
-            Index];
-            mintedWallets[lazyList
-            ] = 0;
+         for(uint256 lazyListIndex = 0; lazyListIndex < lazyList.length; lazyListIndex++) {
+            address lazyMinter = lazyList[lazyListIndex];
+            lazyWallets[lazyMinter] = 0;
         }
-        lazyList
-        s = new address[](0);
+        lazyList = new address[](0);
         (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed!");
+    }
+
+    // function to get all minters
+    function getLazyList() external view onlyOwner returns(address[] memory) {
+        return lazyList;
     }
 
     // The following functions are overrides required by Solidity.

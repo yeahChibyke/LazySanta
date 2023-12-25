@@ -17,7 +17,7 @@ Want to be part of the LazySanta crew? Mint your very own LazySanta NFT! It's su
 - ### 🚀 How to Mint:
 
     - Head over to [Remix](remix.ethereum.org).
-    - Load the LazySanta contract from [this address](###contract-address).
+    - Load the LazySanta contract from [this address](#contract-address).
     - Make sure your Sepolia wallet is connected.
     - Make sure the correct figure of 0.01 ether is inputted in the value field.
     - Call the [safeMint()](https://github.com/yeahChibyke/LazySanta/blob/main/src/LazySanta.sol#L92) function.
